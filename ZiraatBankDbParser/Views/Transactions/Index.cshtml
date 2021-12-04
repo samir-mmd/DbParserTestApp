@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ZiraatBankDbParser.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table" border=1 frame=hsides rules=rows style="font-size:small">
+    <tbody>
+        <tr>
+            <td><span style="font-weight:bold">Financial Institution</span></td>
+            <td><span style="font-weight:bold">FX Settlement Date</span></td>
+            <td><span style="font-weight:bold">Reconciliation File ID</span></td>
+            <td><span style="font-weight:bold">Transaction Currency</span></td>
+            <td><span style="font-weight:bold">Reconciliation Currency</span></td>
+            <td><span style="font-weight:bold">Settlement Category</span></td>
+            <td><span style="font-weight:bold">Transaction Amount Credit</span></td>
+            <td><span style="font-weight:bold">Reconciliation Amount Credit</span></td>
+            <td><span style="font-weight:bold">Fee Amount Credit</span></td>
+            <td><span style="font-weight:bold">Transaction Amount Debit</span></td>
+            <td><span style="font-weight:bold">Reconciliation Amount Debit</span></td>
+            <td><span style="font-weight:bold">Fee Amount Debit</span></td>
+            <td><span style="font-weight:bold">Count Total</span></td>
+            <td><span style="font-weight:bold">Net Value</span></td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            @if (item.SettlementCategories != null && item.SettlementCategories.Any())
+            {
+                @foreach (var sc in item.SettlementCategories)
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => item.FinInst)        </td>
+                        <td> @Html.DisplayFor(modelItem => item.FxSetDate)        </td>
+                        <td> @Html.DisplayFor(modelItem => item.RecFileId)        </td>
+                        <td> @Html.DisplayFor(modelItem => item.TransCurrency)        </td>
+                        <td> @Html.DisplayFor(modelItem => item.ReconCurrency)        </td>
+                        <td> @Html.DisplayFor(modelItem => sc.CatName)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.TransAmountCredit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.ReconAmountCredit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.FeeAmountCredit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.TransAmountDebit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.ReconAmountDebit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.FeeAmountDebit)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.CountTotal)</td>
+                        <td> @Html.DisplayFor(modelItem => sc.NetValue)</td>
+                    </tr>
+                }
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td><span style="font-weight:bold">Totals:</span></td>
+                    <td> @Html.DisplayFor(modelItem => item.TransAmountCreditTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.ReconAmountCreditTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.FeeAmountCreditTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.TransAmountDebitTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.ReconAmountDebitTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.FeeAmountDebitTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.CountTotalTotal)</td>
+                    <td> @Html.DisplayFor(modelItem => item.NetValueTotal)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

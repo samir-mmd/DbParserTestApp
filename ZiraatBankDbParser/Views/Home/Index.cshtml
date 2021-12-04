@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "DB Parser";
+}
+
+<div class="text-center" >
+    <h4>Db Parser Test Application</h4>
+    <form asp-action="Index" asp-controller="Transactions" method="post" enctype="multipart/form-data">
+        <input class="input" type="file" name="uploadedFile" />
+        <input type="submit" class="button" value="Upload & Show"  />        
+    </form>
+</div>
+
+
+
+<script>
+    let input = document.querySelector(".input");
+    let button = document.querySelector(".button");
+    button.disabled = true;
+    input.addEventListener("change", stateHandle);
+
+    function stateHandle() {
+        if (document.querySelector(".input").value === "") {
+            button.disabled = true;
+        } else {
+            button.disabled = false;
+        }
+    }
+</script>
